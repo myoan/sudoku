@@ -1,19 +1,17 @@
 module Sudoku
   class DataValidator
-    def self.validate_x_axis_format!(data)
-      data.each do |line|
-        next if line.size == 9
-        raise "InvalidFormat"
-      end
+    def self.validate!(data)
+      self.validate_format!(data)
+      self.validate_data!(data)
     end
 
-    def self.validate_y_axis_format!(data)
-      return if data.size == 9
+    def self.validate_format!(data)
+      return if data.size == 81
       raise "InvalidFormat"
     end
 
-    def self.validate_data(data)
-      return if data.join.match(/(\s|[1-9])/)
+    def self.validate_data!(data)
+      return if data.match(/(\s|[1-9]|x)/)
       raise "InvalidData"
     end
   end
